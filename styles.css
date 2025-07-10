@@ -1,0 +1,115 @@
+* {
+    font-family: "Inter", sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.hero {
+    position: relative;
+    height: 200px;
+    background-image: url("./assets/heroimage.png");
+    background-color: black; 
+    background-size: cover;
+    width: 100%;
+}
+
+.hero-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    height: 100%;
+    width: 80%;
+    max-width: 800px;
+    margin: auto;
+    align-items: center;
+
+}
+
+@media (min-width: 768px) {
+    .hero {
+        height: 220px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .hero {
+        height: 250px;
+    }
+}
+
+.hero a {
+    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 1.5rem;
+    text-decoration: none;
+}
+
+.hero-title {
+    color: white;
+    font-weight: 900;
+    font-size: 3.5rem;
+}
+
+.search-form {
+    position: absolute;
+    bottom: -24px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    width: 80%;
+    max-width: 800px;
+    background-color: white;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.search-form input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border: none;
+    outline: none;
+}
+
+.search-form button {
+    padding: 0.75rem 1.25rem;
+    background-color: gray/1;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.search-icon {
+  color: #9CA3AF; /* gray-400 */
+  width: 24px;
+  height: 24px;
+  margin-left: 0.75rem;
+  margin-right: 0.5rem;
+  align-self: center;
+}
+
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20%;
+    color: #DFDDDD;
+}
+
+.empty-state h2 {
+    font-size: 2.5rem;
+    font-weight: 900;
+    margin: 0.4em;
+}
+
+.exploring-image {
+    width: 10%;
+    margin: 0;
+}
