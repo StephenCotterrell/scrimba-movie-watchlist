@@ -2,9 +2,10 @@ const searchForm = document.getElementById("search-form")
 const searchResults = document.querySelector(".search-results")
 const emptyState = document.querySelector(".empty-state")
 const movieMap = {}
+const apikey = import.meta.env.VITE_OMDB_API_KEY
 
 async function getMovieSearch(searchTerm) { 
-    const query = `http://www.omdbapi.com/?s=${searchTerm}&apikey=[REDACTED]`
+    const query = `http://www.omdbapi.com/?s=${searchTerm}&apikey=${apikey}`
     const res = await fetch(query)
     const data = await res.json()
     const searchResults = data.Search
@@ -13,7 +14,7 @@ async function getMovieSearch(searchTerm) {
 }
 
 async function getMovieDetails(imdbID) {
-    const query = `http://www.omdbapi.com/?i=${imdbID}&apikey=[REDACTED]`
+    const query = `http://www.omdbapi.com/?i=${imdbID}&apikey=${apikey}`
     const res = await fetch(query)
     const data = await res.json()
     return data
