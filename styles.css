@@ -78,7 +78,7 @@ body {
 
 .search-form button {
     padding: 0.75rem 1.25rem;
-    background-color: gray/1;
+    background-color: lightgray;
     border: none;
     font-weight: bold;
     cursor: pointer;
@@ -116,4 +116,67 @@ body {
 
 .hidden {
     display: none;
+}
+
+.movie-card {
+    display: flex;
+    padding: 20px;
+    margin: auto;
+    width: 82%;
+}
+
+.movie-poster {
+    display: flex; 
+    flex-direction: column;
+    justify-content: center;
+}
+
+.movie-poster img{
+    width: 20vw;
+    height: auto;
+    border-radius: 5px;
+}
+
+.movie-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 10px;
+}
+
+.movie-details div {
+    display: flex;
+    flex-direction: row;
+    align-items: center; 
+    text-align: left;
+    line-height: 1.325;
+    margin: 0.325em;
+    gap: 0;
+}
+
+.movie-details h2, p, strong {
+   margin: 0 10px;
+   padding: 0;
+}
+
+.search-results {
+    margin: 40px 0 0 0;
+}
+
+.movie-plot {
+    color: #6B7280;
+}
+
+.add-to-watchlist {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background-color: inherit;
+    cursor: pointer;
+}
+
+.add-icon {
+    width: 1.3em;
+    margin: 0 5px 0 0;
 }

@@ -53,16 +53,42 @@ async function renderMovies(movies) {
         movieMap[movie.imdbID] = movie;
         html += `
             <div class="movie-card" data-id="${movie.imdbID}">
-                <img src="${movie.Poster}" alt="${movie.Title} poster"/>
-                <h2>${movie.Title}</h2>
-                <p><strong>Runtime:</strong>${movie.Runtime}</p>
-                <p><strong>Genres:</strong>${movie.Genre}</p>
-                <p>${movie.Plot}</p>
-                <button class="add-to-watchlist">Add to watchlist</button>
+                <div class="movie-poster">
+                    <img src="${movie.Poster}" alt="${movie.Title} poster"/>
+                </div>
+                <div class="movie-details">
+                    <div>
+                        <h2>${movie.Title}</h2><p>⭐<strong>${movie.imdbRating}</strong></p>
+                    </div>
+                    <div>
+                        <p>${movie.Runtime}</p>
+                        <p>${movie.Genre}</p>
+                        <button class="add-to-watchlist">
+                            <img src="./assets/addicon.svg" class="add-icon"/>  
+                            Watchlist
+                        </button>
+                    </div>
+                    <div class="movie-plot">
+                        <p>${movie.Plot}</p>
+                    </div>
+                </div>
             </div>
         `
     })
     searchResults.innerHTML = html;
+    console.log(movieMap)
 }
 
-// console.log(await getMovieSearch('blade runner'))
+document.addEventListener('click', function (e) {
+    if (e.target.classList.contains('add-to-watchlist')) {
+        const card = e.target.closest('.movie-card')
+        const imdbID = card.dataset.id
+        const movie = movieMap[imdbID]
+
+        if (movie) {
+            const stored = JSON.parse(localStorage.getItem('watchlist') || '[]');
+            stored.push(movie)
+            localStorage.setItem('watchlist', JSON.stringify(stored))
+        }
+    }
+})
