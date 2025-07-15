@@ -167,7 +167,7 @@ body {
     color: #6B7280;
 }
 
-.add-to-watchlist {
+.add-to-watchlist, .remove-from-watchlist {
     display: flex;
     align-items: center;
     justify-content: center;

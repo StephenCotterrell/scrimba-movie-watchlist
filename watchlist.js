@@ -29,7 +29,7 @@ async function renderMovies(movies) {
                     <div>
                         <p>${movie.Runtime}</p>
                         <p>${movie.Genre}</p>
-                        <button class="add-to-watchlist">
+                        <button class="remove-from-watchlist">
                             <img src="./assets/removeicon.svg" class="add-icon"/>  
                             Watchlist
                         </button>
@@ -46,3 +46,19 @@ async function renderMovies(movies) {
 }
 
 getSavedMovies()
+
+document.addEventListener('click', function (e) {
+    if (e.target.classList.contains('remove-from-watchlist')) {
+        const card = e.target.closest('.movie-card')
+        const imdbID = card.dataset.id
+        const movie = movieMap[imdbID]
+
+        if (movie) {
+            const stored = JSON.parse(localStorage.getItem('watchlist'))
+            const updated = stored.filter(movie => movie.imdbID != imdbID)
+            localStorage.setItem('watchlist', JSON.stringify(updated))
+        }
+        
+        card.remove()
+    }
+})
