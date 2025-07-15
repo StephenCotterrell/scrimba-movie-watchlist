@@ -4,17 +4,14 @@ const movieMap = {}
 
 async function getSavedMovies () {
     const stored = JSON.parse(localStorage.getItem('watchlist') || '[]')
-    console.log(stored)
     await renderMovies(stored)
     
 }
 
-
 async function renderMovies(movies) {
-    emptyState.classList.add('hidden');
+    emptyState.classList.toggle('hidden', movies.length > 0)
     searchResults.innerHTML = '';
     let html = '';
-    console.log(movies)
     movies.forEach(movie => {
         movieMap[movie.imdbID] = movie;
         html += `
@@ -42,7 +39,6 @@ async function renderMovies(movies) {
         `
     })
     searchResults.innerHTML = html;
-    console.log(movieMap)
 }
 
 getSavedMovies()
@@ -57,8 +53,9 @@ document.addEventListener('click', function (e) {
             const stored = JSON.parse(localStorage.getItem('watchlist'))
             const updated = stored.filter(movie => movie.imdbID != imdbID)
             localStorage.setItem('watchlist', JSON.stringify(updated))
+            renderMovies(updated)
+            card.remove()
         }
         
-        card.remove()
     }
 })
