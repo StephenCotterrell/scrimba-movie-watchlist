@@ -17,7 +17,7 @@ async function renderMovies(movies) {
         html += `
             <div class="movie-card" data-id="${movie.imdbID}">
                 <div class="movie-poster">
-                    <img src="${movie.Poster}" alt="${movie.Title} poster"/>
+                    <img src="${movie.Poster ? movie.Poster :a}" alt="${movie.Title} poster"/>
                 </div>
                 <div class="movie-details">
                     <div>
@@ -26,8 +26,8 @@ async function renderMovies(movies) {
                     <div>
                         <p>${movie.Runtime}</p>
                         <p>${movie.Genre}</p>
-                        <button class="remove-from-watchlist">
-                            <img src="./assets/removeicon.svg" class="add-icon"/>  
+                        <button class="watchlist-button remove">
+                            <img src="./assets/removeicon.svg" class="icon"/>  
                             Watchlist
                         </button>
                     </div>
@@ -44,7 +44,7 @@ async function renderMovies(movies) {
 getSavedMovies()
 
 document.addEventListener('click', function (e) {
-    if (e.target.classList.contains('remove-from-watchlist')) {
+    if (e.target.classList.contains('remove')) {
         const card = e.target.closest('.movie-card')
         const imdbID = card.dataset.id
         const movie = movieMap[imdbID]

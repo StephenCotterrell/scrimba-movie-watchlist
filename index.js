@@ -50,12 +50,18 @@ async function renderMovies(movies) {
     searchResults.innerHTML = '';
     let html = '';
     console.log(movies)
+    const stored = JSON.parse(localStorage.getItem('watchlist') || '[]')
+    const storedIds = new Set(stored.map(m => m.imdbID))
     movies.forEach(movie => {
         movieMap[movie.imdbID] = movie;
+        const isInWatchList = storedIds.has(movie.imdbID)
         html += `
             <div class="movie-card" data-id="${movie.imdbID}">
                 <div class="movie-poster">
-                    <img src="${movie.Poster}" alt="${movie.Title} poster"/>
+                    ${movie.Poster !== 'N/A' 
+                        ? `<img src="${movie.Poster}" alt="${movie.Title}" onerror="this.style.visibility='hidden'"/>`
+                        : ``
+                    }
                 </div>
                 <div class="movie-details">
                     <div>
@@ -64,8 +70,8 @@ async function renderMovies(movies) {
                     <div>
                         <p>${movie.Runtime}</p>
                         <p>${movie.Genre}</p>
-                        <button class="add-to-watchlist">
-                            <img src="./assets/addicon.svg" class="add-icon"/>  
+                        <button class="${isInWatchList ? 'remove': 'add'} watchlist-button">
+                            <img class="icon" src="./assets/${isInWatchList ? 'remove' : 'add'}icon.svg" alt=""/>  
                             Watchlist
                         </button>
                     </div>
@@ -77,19 +83,32 @@ async function renderMovies(movies) {
         `
     })
     searchResults.innerHTML = html;
-    console.log(movieMap)
+}
+
+function updateWatchlistButton(button, isAdded) {
+    button.classList.toggle('add', isAdded)
+    button.classList.toggle('remove', !isAdded)
+    let icon = button.querySelector('img.icon')
+    icon.src = isAdded ? './assets/removeicon.svg' : './assets/addicon.svg'
+    icon.alt = isAdded ? 'Remove from watchlist' : 'Add to watchlist'
 }
 
 document.addEventListener('click', function (e) {
-    if (e.target.classList.contains('add-to-watchlist')) {
+    if (e.target.classList.contains('watchlist-button')) {
         const card = e.target.closest('.movie-card')
+        const button = e.target.closest('.watchlist-button')
+        if (!button) return
         const imdbID = card.dataset.id
         const movie = movieMap[imdbID]
-
-        if (movie) {
-            const stored = JSON.parse(localStorage.getItem('watchlist') || '[]');
+        let stored = JSON.parse(localStorage.getItem('watchlist') || '[]');
+        const storedIds = new Set(stored.map(m => m.imdbID))
+        const isAdded = storedIds.has(imdbID)
+        if (isAdded) {
+            stored = stored.filter(m => m.imdbID !== imdbID)
+        } else {
             stored.push(movie)
-            localStorage.setItem('watchlist', JSON.stringify(stored))
         }
+        localStorage.setItem('watchlist', JSON.stringify(stored))
+        updateWatchlistButton(button, !isAdded)
     }
 })
