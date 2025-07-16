@@ -99,7 +99,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 20%;
+    margin-top: 15vh;
     color: #DFDDDD;
 }
 
@@ -165,7 +165,8 @@ body {
 }
 
 .search-results {
-    margin: 40px 0 0 0;
+    margin: 40px auto 0;
+    width: 80vw;
 }
 
 .movie-plot {
@@ -194,4 +195,11 @@ body {
     justify-content: center;
     align-items: center;
     gap: 5px;
+}
+
+.divider {
+    width: 100%;
+    height: 2px;
+    background-color: #eee;
+
 }

@@ -17,7 +17,10 @@ async function renderMovies(movies) {
         html += `
             <div class="movie-card" data-id="${movie.imdbID}">
                 <div class="movie-poster">
-                    <img src="${movie.Poster ? movie.Poster :a}" alt="${movie.Title} poster"/>
+                    ${movie.Poster !== 'N/A' 
+                        ? `<img src="${movie.Poster}" alt="${movie.Title}" onerror="this.style.visibility='hidden'"/>`
+                        : ``
+                    }
                 </div>
                 <div class="movie-details">
                     <div>
@@ -35,6 +38,8 @@ async function renderMovies(movies) {
                         <p>${movie.Plot}</p>
                     </div>
                 </div>
+            </div>
+            <div class='divider'>
             </div>
         `
     })

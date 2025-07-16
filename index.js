@@ -80,6 +80,8 @@ async function renderMovies(movies) {
                     </div>
                 </div>
             </div>
+            <div class='divider'
+            </div>
         `
     })
     searchResults.innerHTML = html;
