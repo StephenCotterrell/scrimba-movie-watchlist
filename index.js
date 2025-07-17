@@ -80,7 +80,7 @@ async function renderMovies(movies) {
                     </div>
                 </div>
             </div>
-            <div class='divider'
+            <div class='divider'>
             </div>
         `
     })
